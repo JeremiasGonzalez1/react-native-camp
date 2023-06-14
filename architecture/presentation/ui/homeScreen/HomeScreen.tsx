@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, ScrollView } from 'react-native'
+import { View, ScrollView, Dimensions } from 'react-native'
 import { HomeViewModel } from './HomeViewModel'
 import { GetPlayNowUseCase } from '../../../domain/usecase/GetPlayNowUseCase'
 import { MovieRepositoryImpl } from '../../../data/repositories/MovieRepository';
@@ -10,14 +10,17 @@ import { SearchFilmUseCase } from '../../../domain/usecase/SearchFilmUseCase';
 import { UpComingUseCase } from '../../../domain/usecase/UpComingUseCase';
 import { observer } from 'mobx-react-lite';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import Carousel from 'react-native-reanimated-carousel';
-import { Poster } from '../../components/Poster';
-import { Search } from '../../components/Search';
-import { Profile } from '../../components/Profile';
+import Carousel from 'react-native-snap-carousel';
+import { Poster } from '../../components/GlobalScreen/Poster';
+import { Search } from '../../components/home/Search';
+import { Profile } from '../../components/home/Profile';
 import { StylePoster } from '../../style/StylePoster';
-import { Welcom } from '../../components/Welcom';
-import { ItemUpComing } from '../../components/ItemUpComing';
-import { Movie } from '../../../domain/entities/Movie';
+import { Welcom } from '../../components/home/Welcom';
+import { ItemUpComing } from '../../components/home/ItemUpComing';
+import { SeccionDivider } from '../../components/onBoarding/SeccionDivider';
+import { Style } from '../../style/style';
+
+const windowWidth = Dimensions.get('window').width
 
 export const HomeScreen = () => {
     const movieDb = new FakeMovieDBImpl()
@@ -32,7 +35,7 @@ export const HomeScreen = () => {
     viewModel.getPlayNow()
     viewModel.getUpComing()
     return (
-        <ScrollView>
+        <ScrollView style={Style.globalStyle}>
             <View style={{
                 flexDirection: 'row',
             }}>
@@ -42,22 +45,14 @@ export const HomeScreen = () => {
 
             <View>
                 <Search />
-                <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 28 }}>
-                    <Text style={{ fontSize: 18, fontWeight: '300', color: "white", marginStart: 18 }}>
-                        Now Playing
-                    </Text>
-
-                    <Text style={{ fontSize: 14, fontStyle: 'normal', color: "#EBA352", marginEnd: 39 }}>
-                        See all
-                    </Text>
-                </View>
+                <SeccionDivider tittle={"Now Playing"} button={"See all"} />
                 <NowPlayingScreen viewModel={viewModel} />
             </View>
 
             <View>
+                <SeccionDivider tittle={"Up Coming"} button={"See all"} />
                 <UpComingScreen viewModel={viewModel} />
             </View>
-
 
         </ScrollView>
     )
@@ -67,20 +62,16 @@ interface ViewProps {
     viewModel: HomeViewModel
 }
 
-interface RenderList {
-    item: Movie
-}
-
 const NowPlayingScreen = observer(({ viewModel }: ViewProps) => {
     const movies = viewModel.nowPlaying
     return (
         <View style={{}}>
             <GestureHandlerRootView style={StylePoster.carouselStyle}>
                 <Carousel
-                    width={220}
-                    height={400}
+                    itemWidth={300}
+                    sliderWidth={windowWidth}
                     data={movies}
-                    scrollAnimationDuration={1000}
+                    inactiveSlideOpacity={0.9}
                     renderItem={({ index }) => (<Poster movie={movies[index]} />
                     )}
                 >

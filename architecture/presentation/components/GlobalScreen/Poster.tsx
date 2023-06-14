@@ -1,7 +1,7 @@
 import React from 'react'
 import { Image, View, Button, Text, TouchableOpacity } from 'react-native'
-import { Movie } from '../../domain/entities/Movie'
-import { StylePoster } from '../style/StylePoster'
+import { Movie } from '../../../domain/entities/Movie'
+import { StylePoster } from '../../style/StylePoster'
 
 interface Props {
     movie: Movie
@@ -10,15 +10,19 @@ export const Poster = ({ movie }: Props) => {
     const baseUrl = "https://image.tmdb.org/t/p/w500"
     return (
 
-        <TouchableOpacity style={{
-            flex: 1,
-            marginHorizontal: 2,
-            paddingBottom: 20,
-            paddingHorizontal: 7,
-        }}>
+        <TouchableOpacity
+            activeOpacity={0.8}
+
+            style={{
+                flex: 1,
+                marginHorizontal: 2,
+                paddingBottom: 20,
+                paddingHorizontal: 7,
+                height:420, 
+                width:300
+            }}>
             <View style={{
-                height: "100%",
-                width: "100%",
+                flex: 1
             }}>
                 <Image style={{
                     flex: 1

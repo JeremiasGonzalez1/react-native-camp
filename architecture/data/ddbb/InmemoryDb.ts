@@ -1,3 +1,4 @@
+import { OriginalLanguage } from "../../domain/entities/Movie";
 import { Movie } from "../../domain/entities/Movie";
 
 export interface MovieDB {
@@ -24,7 +25,7 @@ export class FakeMovieDBImpl implements MovieDB {
         backdrop_path: "string",
         genre_ids: [1, 2, 3],
         id: 2,
-        // original_language: {{O}}
+        original_language: OriginalLanguage.En,
         original_title: "string",
         overview: "string",
         popularity: 3,
@@ -40,7 +41,7 @@ export class FakeMovieDBImpl implements MovieDB {
         backdrop_path: "string",
         genre_ids: [1, 2, 3],
         id: 2,
-        // original_language: {{O}}
+        original_language: OriginalLanguage.En,
         original_title: "string",
         overview: "string",
         popularity: 3,
@@ -56,7 +57,7 @@ export class FakeMovieDBImpl implements MovieDB {
         backdrop_path: "string",
         genre_ids: [1, 2, 3],
         id: 2,
-        // original_language: {{O}}
+        original_language: OriginalLanguage.Es,
         original_title: "string",
         overview: "string",
         popularity: 3,

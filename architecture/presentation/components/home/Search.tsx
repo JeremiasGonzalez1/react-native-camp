@@ -1,6 +1,6 @@
 import React from 'react'
 import { TextInput, View } from 'react-native'
-import { StyleSearch } from '../style/StyleSearch'
+import { StyleSearch } from '../../style/StyleSearch'
 
 export const Search = () => {
     return (

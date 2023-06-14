@@ -1,16 +1,16 @@
+import 'react-native-gesture-handler';
 import React from 'react'
 import { HomeScreen } from './architecture/presentation/ui/homeScreen/HomeScreen'
-import { GestureHandlerRootView } from 'react-native-gesture-handler'
-import { Style } from './architecture/presentation/style/style';
-import { View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { Navigator } from './architecture/presentation/navigation/Navigator';
+import { LoginScreen } from './architecture/presentation/ui/loginScreen/LoginScreen';
+
 
 export const App = () => {
   return (
-    <View style={Style.globalStyle}
-    >
-      <HomeScreen></HomeScreen>
-
-    </View>
+    <NavigationContainer >
+      <HomeScreen />
+    </NavigationContainer>
   )
 }
 
